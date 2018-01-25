@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDashboardMessageToSettings extends Migration
+class AddFooterSettingsToSettings extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddDashboardMessageToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('dashboard_message')->nullable()->default(null);
+            $table->char('support_footer', 5)->nullable()->default('on');
+            $table->text('footer_text')->nullable()->default(null);
         });
     }
 
@@ -26,7 +27,8 @@ class AddDashboardMessageToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('dashboard_message');
+            $table->dropColumn('support_footer');
+            $table->dropColumn('footer_text');
         });
     }
 }

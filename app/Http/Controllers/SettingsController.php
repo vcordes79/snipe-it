@@ -314,6 +314,14 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
+        $setting->modellist_displays = '';
+
+        if (($request->has('show_in_model_list')) && (count($request->has('show_in_model_list')) > 0))
+        {
+            $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
+        }
+
+
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->load_remote = $request->input('load_remote', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
@@ -375,6 +383,8 @@ class SettingsController extends Controller
 
         $setting->brand = $request->input('brand', '1');
         $setting->header_color = $request->input('header_color');
+        $setting->support_footer = $request->input('support_footer');
+        $setting->footer_text = $request->input('footer_text');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
 
 

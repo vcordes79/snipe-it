@@ -36,13 +36,13 @@ class AssetsTransformer
                 'id' => (int) $asset->assetstatus->id,
                 'name'=> e($asset->assetstatus->name),
                 'status_type'=> e($asset->assetstatus->getStatuslabelType()),
-                'status_meta' =>  e($asset->present()->statusMeta),
+                'status_meta' => e($asset->present()->statusMeta),
             ] : null,
-            'category' => ($asset->model->category) ? [
+            'category' => (($asset->model) && ($asset->model->category)) ? [
                 'id' => (int) $asset->model->category->id,
                 'name'=> e($asset->model->category->name)
             ]  : null,
-            'manufacturer' => ($asset->model->manufacturer) ? [
+            'manufacturer' => (($asset->model) && ($asset->model->manufacturer)) ? [
                 'id' => (int) $asset->model->manufacturer->id,
                 'name'=> e($asset->model->manufacturer->name)
             ] : null,
@@ -81,7 +81,7 @@ class AssetsTransformer
         ];
 
 
-        if (($asset->model->fieldset) && (count($asset->model->fieldset->fields)> 0)) {
+        if (($asset->model) && ($asset->model->fieldset) && (count($asset->model->fieldset->fields)> 0)) {
             $fields_array = array();
 
             foreach ($asset->model->fieldset->fields as $field) {

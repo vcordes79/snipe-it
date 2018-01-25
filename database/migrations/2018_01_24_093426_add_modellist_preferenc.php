@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDashboardMessageToSettings extends Migration
+class AddModellistPreferenc extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddDashboardMessageToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('dashboard_message')->nullable()->default(null);
+            $table->char('modellist_displays')->nullable()->default('image,category,manufacturer,model_number');
         });
     }
 
@@ -26,7 +26,7 @@ class AddDashboardMessageToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('dashboard_message');
+            $table->dropColumn('modellist_displays');
         });
     }
 }
